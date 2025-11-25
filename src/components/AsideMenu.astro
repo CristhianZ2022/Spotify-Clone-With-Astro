@@ -1,0 +1,39 @@
+---
+import Library from '../assets/svg/Library.svg';
+import Home from '../assets/svg/Home.svg';
+import Search from '../assets/svg/Search.svg';
+import SideMenuItem from './SideMenuItem.astro';
+import SideMenuCard from './SideMenuCard.astro';
+import { playlists } from '../lib/data';
+---
+
+<nav class="flex flex-col flex-1 gap-2">
+  <div class="bg-zinc-900 rounded-lg p-2">
+    <ul>
+      <SideMenuItem href="/">
+        <span class="flex items-center gap-2 hover:scale-125 transition-transform duration-300">
+          <Home />
+          Inicio
+        </span>
+      </SideMenuItem>
+      <SideMenuItem href="/search">
+        <span class="flex items-center gap-2 hover:scale-125 transition-transform duration-300">
+          <Search /> Buscar
+        </span>
+      </SideMenuItem>
+    </ul>
+  </div>
+
+  <div class="bg-zinc-900 rounded-lg p-2 flex-1">
+    <ul>
+      <SideMenuItem href="/#">
+        <span class="flex items-center gap-2 hover:scale-125 transition-transform duration-300">
+          <Library />
+          Tu biblioteca
+        </span>
+      </SideMenuItem>
+
+      {playlists.map((playlist) => <SideMenuCard playlist={playlist} />)}
+    </ul>
+  </div>
+</nav>
