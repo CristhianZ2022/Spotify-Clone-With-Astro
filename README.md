@@ -1,46 +1,39 @@
-# Astro Starter Kit: Basics
+# 🎵 Spotify Clone with Astro
 
-```sh
-pnpm create astro@latest -- --template basics
-```
+Un clon de la interfaz de **Spotify** construido con [Astro](https://astro.build/) y tecnologías modernas de frontend.  
+Este proyecto busca replicar la experiencia visual de Spotify, sirviendo como práctica de diseño, componentes y arquitectura con Astro.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+---
 
-## 🚀 Project Structure
+## ✨ Características
 
-Inside of your Astro project, you'll see the following folders and files:
+- ⚡️ Framework **Astro** para rendimiento y simplicidad
+- 🎨 Diseño inspirado en Spotify
+- 📱 **Responsive Design** para móviles, tablets y escritorio
+- 🛠️ Configuración con **PNPM** para manejo de dependencias
+- 🔧 Código modular y fácil de extender
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+---
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 📂 Estructura del proyecto
 
-## 🧞 Commands
+/ ├── public/ # Archivos estáticos (favicon, imágenes) ├── src/ │ ├── assets/ # Recursos gráficos │ ├── components/ # Componentes reutilizables │ ├── layouts/ # Layouts principales │ └── pages/ # Páginas del sitio ├── package.json ├── astro.config.mjs └── pnpm-lock.yaml
 
-All commands are run from the root of the project, from a terminal:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+🛠️ Tecnologías utilizadas
+Astro
 
-## 👀 Want to learn more?
+PNPM
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+TypeScript
+
+JavaScript
+
+🤝 Contribuciones
+¡Las contribuciones son bienvenidas! Si deseas mejorar el proyecto, abre un issue o envía un pull request.
+
+📜 Licencia
+Este proyecto está bajo la licencia MIT. Puedes usarlo libremente para aprender, practicar o crear tus propios proyectos.
+
+👨‍💻 Autor
+Desarrollado por CristhianZ2022 🔗 GitHub Profile
