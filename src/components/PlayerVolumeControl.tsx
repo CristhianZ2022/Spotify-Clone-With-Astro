@@ -11,10 +11,30 @@ interface Id {
   id?: string;
 }
 
-const isVolumeSilenced = (volume: number) => volume < 0.1;
-const isVolumeLow = (volume: number) => volume >= 0.1 && volume < 0.5;
-const isVolumeMedium = (volume: number) => volume >= 0.5 && volume < 0.9;
-const isVolumeFull = (volume: number) => volume >= 0.9;
+
+
+const isVolumeSilenced = (loud: number) => loud < 0.1
+const isVolumeLow = (loud: number) => loud >= 0.1 && loud < 0.5
+const isVolumeMedium = (loud: number) => loud >= 0.5 && loud < 0.9
+const isVolumeFull = (loud: number) => loud >= 0.9
+
+
+const getVolumeIconByLouder = (loud: number) => {
+  return (
+    <>
+      {isVolumeSilenced(loud) && <VolumeSilenced/>}
+      {isVolumeLow(loud) && <VolumeLow/>}
+      {isVolumeMedium(loud) && <VolumeMedium/>}
+      {isVolumeFull(loud) && <VolumeFull/>}
+    </>
+  )
+}
+
+
+export const PlayerVolumeIconComponentt = () => {
+  const volume = usePlayerStore(state => state.volume)
+  return getVolumeIconByLouder(volume)
+}
 
 export default function PlayerVolumeIconComponent({ id }: Id) {
   const volume = usePlayerStore((state) => state.volume);

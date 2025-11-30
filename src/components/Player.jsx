@@ -1,13 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { usePlayerStore } from '../store/player.Store';
 import { Slider } from './Slider';
-import {
-  VolumeFull,
-  VolumeLow,
-  VolumeMedium,
-  VolumeSilenced,
-} from '../icons/Volums';
 import { Play, Pause } from '../icons/PlayerIcons';
+import { PlayerVolumeIconComponentt } from './PlayerVolumeControl';
 
 const CurrentSong = ({ image, title, artists }) => {
   return (
@@ -73,32 +68,10 @@ const SongControls = ({ audio }) => {
 
 const VolumeControl = () => {
   const { volume, setVolume } = usePlayerStore((state) => state);
-  const previousVolumeRef = useRef(volume);
-
-  const handleClickVolume = () => {
-    if (volume > 0) {
-      previousVolumeRef.current = volume;
-      setVolume(0);
-    } else {
-      setVolume(previousVolumeRef.current);
-    }
-  };
-
   const volumePercentage = volume * 100;
 
   return (
     <div className="flex justify-center gap-x-2 text-white">
-      <button onClick={handleClickVolume}>
-        {volume < 0.1 ? (
-          <VolumeSilenced />
-        ) : volume > 0.1 && volume < 0.33 ? (
-          <VolumeLow />
-        ) : volume > 0.33 && volume < 0.66 ? (
-          <VolumeMedium />
-        ) : (
-          <VolumeFull />
-        )}
-      </button>
       <Slider
         value={[volumePercentage]}
         defaultValue={[50]}
@@ -116,10 +89,20 @@ const VolumeControl = () => {
 };
 
 export default function Player() {
-  const { currentMusic, isPlaying, setIsPlaying, volume } = usePlayerStore(
+  const { currentMusic, isPlaying, setIsPlaying, volume, setVolume } = usePlayerStore(
     (state) => state
   );
   const audioRef = useRef();
+  const previousVolumeRef = useRef(volume);
+
+  const handleClickVolume = () => {
+    if (volume > 0) {
+      previousVolumeRef.current = volume;
+      setVolume(0);
+    } else {
+      setVolume(previousVolumeRef.current);
+    }
+  };
 
   useEffect(() => {
     isPlaying ? audioRef.current.play() : audioRef.current.pause();
@@ -150,6 +133,7 @@ export default function Player() {
       <div className="grid place-content-center gap-4 flex-1">
         <div className="flex justify-center flex-col items-center">
           <button
+            aria-label='Reproducir'
             className="bg-white rounded-full p-2 text-black"
             onClick={handleClick}
           >
@@ -159,7 +143,10 @@ export default function Player() {
           <audio ref={audioRef}></audio>
         </div>
       </div>
-      <div className="grid place-content-center">
+      <div className="flex gap-x-2" aria-label='Volumen'>
+        <button onClick={handleClickVolume}>
+          <PlayerVolumeIconComponentt />
+        </button>
         <VolumeControl />
       </div>
     </div>

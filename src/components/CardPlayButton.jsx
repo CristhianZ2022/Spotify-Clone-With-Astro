@@ -26,6 +26,7 @@ function CardPlayButton({ id, size="small" }) {
 
   return (
     <button
+      aria-label='Reproducir'
       className="card-play-button rounded-full bg-red-900 p-4 hover:scale-100 transition hover:bg-red-700"
       onClick={handleClick}
     >

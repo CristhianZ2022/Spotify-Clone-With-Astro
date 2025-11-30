@@ -62,6 +62,7 @@ export default function SearchButton({ initialQuery = '' }: SearchInputProps) {
         <BlackSearchIcon />
       </div>
       <input
+      aria-label='Busqueda'
         type="search"
         value={value}
         onChange={(e) => {
