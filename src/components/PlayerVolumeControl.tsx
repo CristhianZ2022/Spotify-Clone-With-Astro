@@ -13,10 +13,10 @@ interface Id {
 
 
 
-const isVolumeSilenced = (loud: number) => loud < 0.1
-const isVolumeLow = (loud: number) => loud >= 0.1 && loud < 0.5
-const isVolumeMedium = (loud: number) => loud >= 0.5 && loud < 0.9
-const isVolumeFull = (loud: number) => loud >= 0.9
+const isVolumeSilenced = (loud: number) => loud === 0
+const isVolumeLow = (loud: number) => loud > 0 && loud < 0.3
+const isVolumeMedium = (loud: number) => loud >= 0.3 && loud < 0.7
+const isVolumeFull = (loud: number) => loud >= 0.7
 
 
 const getVolumeIconByLouder = (loud: number) => {
@@ -41,7 +41,7 @@ export default function PlayerVolumeIconComponent({ id }: Id) {
   const setVolume = usePlayerStore((state) => state.setVolume);
   const { currentMusic, isPlaying } = usePlayerStore((state) => state);
   const previousVolumeRef = useRef(volume);
-  const isButtonVisible = isPlaying && currentMusic?.playlist.id === id;
+  const isButtonVisible = isPlaying && currentMusic?.playlist?.id === id;
 
   const handleClickVolume = (e: React.MouseEvent) => {
     e.preventDefault();
