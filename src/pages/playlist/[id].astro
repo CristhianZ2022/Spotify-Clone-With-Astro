@@ -1,7 +1,7 @@
 ---
 export const prerender = false;
 
-import MusicsTable from '../../components/MusicsTable.astro';
+import MusicsTable from '../../components/MusicTable.tsx';
 import CardPlayButton from '../../components/CardPlayButton.jsx';
 import Layout from '../../layouts/Layout.astro';
 import { allPlaylists, songs } from '../../lib/data';
@@ -65,7 +65,7 @@ const playlistSongs = songs.filter(
       </div>
 
       <section class="">
-        <MusicsTable songs={playlistSongs} />
+        <MusicsTable songs={playlistSongs} client:load />
       </section>
     </main>
   </div>
