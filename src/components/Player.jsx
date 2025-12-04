@@ -7,7 +7,7 @@ import { usePlayerStore } from '../store/player.Store';
 import { PlayerVolumeIconComponentt } from './PlayerVolumeControl';
 
 export default function Player() {
-  const { currentMusic, isPlaying, setIsPlaying, volume, setVolume } = usePlayerStore(
+  const { currentMusic, isPlaying, volume, setVolume } = usePlayerStore(
     (state) => state
   );
   const audioRef = useRef();
