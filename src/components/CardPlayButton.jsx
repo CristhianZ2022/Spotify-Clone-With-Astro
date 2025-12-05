@@ -7,6 +7,8 @@ function CardPlayButton({ id, size = 'small', song }) {
 
   const isPlayingPlaylist = isPlaying && currentMusic?.playlist.id === id;
 
+  const isPlayingSong = isPlaying && currentMusic?.song?.id === song.id;
+
   const isCurrentSongRun = (song) => {
     return (
       currentMusic.song?.id == song.id &&
@@ -48,7 +50,7 @@ function CardPlayButton({ id, size = 'small', song }) {
       className="card-play-button rounded-full bg-red-900 p-4 hover:scale-100 transition hover:bg-red-700"
       onClick={handleClick}
     >
-      {isPlayingPlaylist ? (
+      {isPlayingPlaylist || isPlayingSong ? (
         <Pause className={iconClassName} />
       ) : (
         <Play className={iconClassName} />
