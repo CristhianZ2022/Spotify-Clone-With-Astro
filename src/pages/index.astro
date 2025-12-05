@@ -2,8 +2,8 @@
 import PlayListItemCard from '../components/PlayListItemCard.astro';
 import Greeting from '../components/Greeting.svelte';
 import Layout from '../layouts/Layout.astro';
-import { playlists, songs } from '../lib/data';
-import SongsItemCard from '../components/SongsItemCard.astro';
+import { playlists } from '../lib/data';
+import SongsArray from '../components/SongsArray';
 ---
 
 <Layout title="Spotify Clone">
@@ -20,10 +20,7 @@ import SongsItemCard from '../components/SongsItemCard.astro';
         class="absolute inset-0 bg-linear-to-t from-zinc-900 via-zinc-900/80 -z-1"
       >
       </div>
-      <div class="flex flex-wrap mt-6 gap-4">
-        <h1 class="w-full text-5xl mt-10">Canciones del Momento</h1>
-        {songs.map((song) => <SongsItemCard song={song} />)}
-      </div>
+      <SongsArray client:load />
     </div>
   </div>
 </Layout>
