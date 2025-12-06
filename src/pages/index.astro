@@ -3,7 +3,7 @@ import PlayListItemCard from '../components/PlayListItemCard.astro';
 import Greeting from '../components/Greeting.svelte';
 import Layout from '../layouts/Layout.astro';
 import { playlists } from '../lib/data';
-import SongsArray from '../components/SongsArray';
+import SongsArray from '../components/SongsListItemCard';
 ---
 
 <Layout title="Spotify Clone">
@@ -13,14 +13,15 @@ import SongsArray from '../components/SongsArray';
   >
     <div class="relative z-10 px-6 pt-10">
       <Greeting />
-      <div class="flex flex-wrap mt-6 gap-4">
-        {playlists.map((playlist) => <PlayListItemCard playlist={playlist} />)}
-      </div>
-      <div
-        class="absolute inset-0 bg-linear-to-t from-zinc-900 via-zinc-900/80 -z-1"
-      >
-      </div>
       <SongsArray client:load />
+      <div
+      class="absolute inset-0 bg-linear-to-t from-zinc-900 via-zinc-900/80 -z-1"
+      >
+    </div>
+    <div class="flex flex-wrap mt-6 gap-4">
+      <h1 class="text-4xl font-bold text-white w-full">Albums</h1>
+      {playlists.map((playlist) => <PlayListItemCard playlist={playlist} />)}
+    </div>
     </div>
   </div>
 </Layout>
