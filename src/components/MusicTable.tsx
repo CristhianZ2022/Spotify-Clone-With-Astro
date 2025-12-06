@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { TimeIcon } from '../icons/MusicTableIcons';
 import type { Song } from '../lib/data';
 import { usePlayerStore } from '../store/player.Store';
@@ -5,6 +6,7 @@ import { MusicTablePlay } from './MusicTablePlay';
 
 interface Props {
   songs: Song[];
+  songId: number | undefined;
 }
 
 const isCurrentSong = (song: Song) => {
@@ -14,7 +16,9 @@ const isCurrentSong = (song: Song) => {
   return currentSong?.id === song.id && playlist?.albumId == song.albumId;
 };
 
-export default function MusicTable({ songs }: Props) {
+export default function MusicTable({ songs, songId }: Props) {
+  const [valueSongId, setValueSongId] = useState(songId);
+
   return (
     <table className="table-auto text-left min-w-full divide-y divide-gray-500/50">
       <thead>
@@ -22,35 +26,50 @@ export default function MusicTable({ songs }: Props) {
           <th className="px-4 py-2 font-light">#</th>
           <th className="px-4 py-2 font-light">Title</th>
           <th className="px-4 py-2 font-light">Album</th>
-          <th className="px-4 py-2 font-light"><TimeIcon /></th>
+          <th className="px-4 py-2 font-light">
+            <TimeIcon />
+          </th>
         </tr>
       </thead>
       <tbody>
         <tr className="h-4"></tr>
         {songs.map((song, index) => {
           const isCurrentSongBoolean = isCurrentSong(song);
-          return (
-            <tr key={`{song.albumId}-${song.id}`} className="text-gray-300 border-spacing-0 text-sm font-light hover:bg-white/10 overflow-hidden transition duration-300 group">
-              <td className="relative px-4 py-2 rounded-tl-lg rounded-bl-lg w-5">
-                {/* Número: visible → sube y desaparece */}
-  <span className="
-    absolute inset-0 flex items-center justify-center
-    transition-all duration-300 ease-out
-    group-hover:-translate-y-6 group-hover:opacity-0
-  ">
-    {index + 1}
-  </span>
 
-  {/* Icono Play: empieza abajo oculto → sube al centro */}
-  <div className="
-    absolute inset-0 flex items-center justify-center
-    translate-y-6 opacity-0
-    transition-all duration-300 ease-out
-    group-hover:translate-y-0 group-hover:opacity-100
-  ">
-    <MusicTablePlay song={song} />
-  </div>
-              </td>
+          const handleClickSong = (idSong: number) => {
+            setValueSongId(idSong);
+          };
+
+          return (
+            <tr
+              onClick={() => handleClickSong(song.id)}
+              key={`{song.albumId}-${song.id}`}
+              className={`text-gray-300 border-spacing-0 text-sm font-light overflow-hidden transition duration-300 group
+                ${
+                  song.id !== songId
+                    ? 'bg-transparent hover:bg-white/10'
+                    : valueSongId === songId
+                      ? 'bg-white/10'
+                      : ''
+                }`}
+            >
+              {valueSongId === song.id ? (
+                <td className="relative px-4 py-2 rounded-tl-lg rounded-bl-lg w-5">
+                  <div className=" absolute inset-0 flex items-center justify-center ">
+                    <MusicTablePlay song={song} />
+                  </div>
+                </td>
+              ) : (
+                <td className="relative px-4 py-2 rounded-tl-lg rounded-bl-lg w-5">
+                  <span className=" absolute inset-0 flex items-center justify-center transition-all duration-300 ease-out group-hover:-translate-y-6 group-hover:opacity-0 ">
+                    {index + 1}
+                  </span>
+
+                  <div className=" absolute inset-0 flex items-center justify-center translate-y-6 opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-10 ">
+                    <MusicTablePlay song={song} />
+                  </div>
+                </td>
+              )}
               <td className="px-4 py-2 flex gap-3">
                 <picture>
                   <img
